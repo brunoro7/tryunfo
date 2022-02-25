@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class InputAttr3 extends React.Component {
   render() {
+    const { valor, quandoMudar } = this.props;
     return (
       <label htmlFor="cardAttr3">
         Attr03
@@ -10,10 +12,16 @@ class InputAttr3 extends React.Component {
           type="number"
           name="cardAttr3"
           id="insertCardAttr3"
+          value={ valor }
+          onChange={ quandoMudar }
         />
       </label>
     );
   }
 }
+InputAttr3.propTypes = {
+  valor: PropTypes.number.isRequired,
+  quandoMudar: PropTypes.func.isRequired,
+};
 
 export default InputAttr3;

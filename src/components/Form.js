@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import InputCardDescription from './InputCardDescription';
 import InputCardName from './InputCardName';
@@ -12,20 +13,75 @@ import SaveButton from './SaveButton';
 
 class Form extends React.Component {
   render() {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      onInputChange,
+      isSaveButtonDisabled,
+      onSaveButtonClick,
+    } = this.props;
+
     return (
       <form>
-        <InputCardName />
-        <InputCardDescription />
-        <InputAttr1 />
-        <InputAttr2 />
-        <InputAttr3 />
-        <InputCardImage />
-        <SelectCardRare />
-        <InputCheckTrunfo />
-        <SaveButton />
+        <InputCardName
+          valor={ cardName }
+          quandoMudar={ onInputChange }
+        />
+        <InputCardDescription
+          valor={ cardDescription }
+          quandoMudar={ onInputChange }
+        />
+        <InputAttr1
+          valor={ cardAttr1 }
+          quandoMudar={ onInputChange }
+        />
+        <InputAttr2
+          valor={ cardAttr2 }
+          quandoMudar={ onInputChange }
+        />
+        <InputAttr3
+          valor={ cardAttr3 }
+          quandoMudar={ onInputChange }
+        />
+        <InputCardImage
+          valor={ cardImage }
+          quandoMudar={ onInputChange }
+        />
+        <SelectCardRare
+          valor={ cardRare }
+          quandoMudar={ onInputChange }
+        />
+        <InputCheckTrunfo
+          valor={ cardTrunfo }
+          quandoMudar={ onInputChange }
+        />
+        <SaveButton
+          valor={ isSaveButtonDisabled }
+          quandoMudar={ onSaveButtonClick }
+        />
       </form>
     );
   }
 }
+
+Form.propTypes = {
+  cardName: PropTypes.string.isRequired,
+  cardDescription: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.number.isRequired,
+  cardAttr2: PropTypes.number.isRequired,
+  cardAttr3: PropTypes.number.isRequired,
+  cardImage: PropTypes.string.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.bool.isRequired,
+  isSaveButtonDisabled: PropTypes.func.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
+};
 
 export default Form;
