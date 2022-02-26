@@ -1,5 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
+import Card from './components/Card';
+import './App.css';
 
 class App extends React.Component {
   constructor() {
@@ -23,12 +25,12 @@ class App extends React.Component {
     this.setState({
       [name]: event.target.value,
     });
-    console.log(event.target.value);
+    // console.log(event.target.value);
 
-    isSaveButtonDisabled = () => {};
+    isSaveButtonDisabled = () => (false);
   };
 
-  onSaveButtonDisabled = () => {};
+  onSaveButtonDisabled = () => (false);
 
   render() {
     const {
@@ -45,24 +47,55 @@ class App extends React.Component {
       hasTrunfo,
     } = this.state;
     return (
-      <div>
-        <h1>Tryunfo</h1>
+      <body className="bodyContent">
 
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          onInputChange={ this.onInputChange }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onSaveButtonClick={ onSaveButtonClick }
-        />
-      </div>
+        <header className="headerContent">
+          <h1>Tryunfo</h1>
+        </header>
+
+        <main className="mainContent">
+
+          <section className="formSection">
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              hasTrunfo={ hasTrunfo }
+              onInputChange={ this.onInputChange }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              onSaveButtonClick={ onSaveButtonClick }
+            />
+          </section>
+
+          <section className="cardSection">
+
+            <h2>
+              Pré-Visualização:
+            </h2>
+
+            <div>
+              <Card
+                cardName={ cardName }
+                cardDescription={ cardDescription }
+                cardAttr1={ cardAttr1 }
+                cardAttr2={ cardAttr2 }
+                cardAttr3={ cardAttr3 }
+                cardImage={ cardImage }
+                cardRare={ cardRare }
+                cardTrunfo={ cardTrunfo }
+              />
+            </div>
+
+          </section>
+
+        </main>
+
+      </body>
     );
   }
 }
