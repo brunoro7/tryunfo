@@ -40,7 +40,7 @@ class Card extends React.Component {
           { cardRare }
         </p>
         {
-          cardTrunfo === true
+          (cardTrunfo === true)
             ? <p data-testid="trunfo-card">Super Trunfo</p> : ''
         }
       </div>
