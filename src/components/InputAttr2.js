@@ -20,7 +20,7 @@ class InputAttr2 extends React.Component {
   }
 }
 InputAttr2.propTypes = {
-  valor: PropTypes.number.isRequired,
+  valor: PropTypes.string.isRequired,
   quandoMudar: PropTypes.func.isRequired,
 };
 

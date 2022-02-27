@@ -20,7 +20,7 @@ class InputAttr3 extends React.Component {
   }
 }
 InputAttr3.propTypes = {
-  valor: PropTypes.number.isRequired,
+  valor: PropTypes.string.isRequired,
   quandoMudar: PropTypes.func.isRequired,
 };
 

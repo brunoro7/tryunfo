@@ -9,9 +9,9 @@ class App extends React.Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
@@ -26,12 +26,48 @@ class App extends React.Component {
       ? event.target.checked : event.target.value;
     this.setState({
       [name]: eventValue,
-    });
-
-    // isSaveButtonDisabled = () => ();
+    }, this.buttonValidation);
   };
 
-  // onSaveButtonDisabled = () => ();
+  buttonValidation = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    } = this.state;
+
+    const arrayInputText = [cardName, cardDescription, cardImage, cardRare];
+    const testArrayInputText = arrayInputText
+      .every((inputText) => inputText !== '');
+
+    const numberAttr1 = parseFloat(cardAttr1);
+    const numberAttr2 = parseFloat(cardAttr2);
+    const numberAttr3 = parseFloat(cardAttr3);
+    const minValue = 0;
+    const maxValue = 90;
+    const sumMaxAttrValues = 210;
+    const validatedSumMax = numberAttr1 + numberAttr2 + numberAttr3 <= sumMaxAttrValues;
+
+    const arrayInputNumber = [numberAttr1, numberAttr2, numberAttr3];
+    const testArrayInputNumber = arrayInputNumber
+      .every((inputNumber) => inputNumber >= minValue && inputNumber <= maxValue);
+
+    const validated = testArrayInputText && testArrayInputNumber && validatedSumMax;
+
+    if (validated) {
+      this.setState({
+        isSaveButtonDisabled: false,
+      });
+    } else {
+      this.setState({
+        isSaveButtonDisabled: true,
+      });
+    }
+  }
 
   render() {
     const {
@@ -48,7 +84,7 @@ class App extends React.Component {
       hasTrunfo,
     } = this.state;
     return (
-      <body className="bodyContent">
+      <div className="bodyContent">
 
         <header className="headerContent">
           <h1>Tryunfo</h1>
@@ -96,7 +132,7 @@ class App extends React.Component {
 
         </main>
 
-      </body>
+      </div>
     );
   }
 }
