@@ -15,10 +15,10 @@ class SelectCardRare extends React.Component {
           value={ valor }
           onChange={ quandoMudar }
         >
-          <option name="cardRare" value="" defaultValue={ ' ' }> </option>
           <option name="cardRare" value="normal">Normal</option>
           <option name="cardRare" value="raro">Raro</option>
           <option name="cardRare" value="muito raro">Muito Raro</option>
+          <option name="cardRare" value="" defaultValue={ ' ' }> </option>
         </select>
       </label>
     );
