@@ -1,7 +1,6 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
-import CardInBook from './components/CardInBook';
 import './App.css';
 
 class App extends React.Component {
@@ -121,7 +120,7 @@ class App extends React.Component {
       cardTrunfo,
       isSaveButtonDisabled,
       hasTrunfo,
-      // bookOfCards,
+      bookOfCards,
     } = this.state;
     return (
       <div className="bodyContent">
@@ -177,12 +176,21 @@ class App extends React.Component {
               CardBook Tryunfo
             </h2>
             <div className="cardBookList">
-              {/* {bookOfCards.map((cardInBook) => (
-                <div className="cardInBookContent" key={ cardInBook.cardName }>
-                  <CardInBook cardInBook={ cardInBook } key={ cardInBook.cardName } />
-                </div>
-              ))} */}
-              <CardInBook />
+              { bookOfCards.map((cardInBook) => (
+                <Card
+                  className="cardInBoxContent"
+                  cardInBook={ cardInBook }
+                  key={ cardInBook.cardName }
+                  cardName={ cardInBook.cardName }
+                  cardDescription={ cardInBook.cardDescription }
+                  cardAttr1={ cardInBook.cardAttr1 }
+                  cardAttr2={ cardInBook.cardAttr2 }
+                  cardAttr3={ cardInBook.cardAttr3 }
+                  cardImage={ cardInBook.cardImage }
+                  cardRare={ cardInBook.cardRare }
+                  cardTrunfo={ cardInBook.cardTrunfo }
+                />
+              ))}
             </div>
           </section>
 
