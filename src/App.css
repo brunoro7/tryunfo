@@ -6,6 +6,13 @@
 
 .mainContent {
   display: flex;
+  flex-direction: column;
+  height: 350px;
+  width: 100%;
+}
+
+.boxCreationCards {
+  display: flex;
   height: 350px;
   width: 100%;
 }
@@ -27,4 +34,9 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 50%;
+}
+
+img {
+  height: 75px;
+  width: 125px;
 }

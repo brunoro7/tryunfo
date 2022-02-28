@@ -18,7 +18,6 @@ class SelectCardRare extends React.Component {
           <option name="cardRare" value="normal">Normal</option>
           <option name="cardRare" value="raro">Raro</option>
           <option name="cardRare" value="muito raro">Muito Raro</option>
-          <option name="cardRare" value="" defaultValue={ ' ' }> </option>
         </select>
       </label>
     );

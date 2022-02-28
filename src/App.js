@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import CardInBook from './components/CardInBook';
 import './App.css';
 
 class App extends React.Component {
@@ -17,6 +18,7 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      bookOfCards: [],
     };
   }
 
@@ -69,6 +71,44 @@ class App extends React.Component {
     }
   }
 
+  onSaveButtonClick = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    } = this.state;
+
+    const cardBook = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+    this.setState((prevState) => ({
+      bookOfCards: [...prevState.bookOfCards, cardBook],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+      hasTrunfo: false,
+      isSaveButtonDisabled: true,
+    }));
+    console.log(this.state);
+  };
+
   render() {
     const {
       cardName,
@@ -80,8 +120,8 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
-      onSaveButtonClick,
       hasTrunfo,
+      // bookOfCards,
     } = this.state;
     return (
       <div className="bodyContent">
@@ -92,30 +132,30 @@ class App extends React.Component {
 
         <main className="mainContent">
 
-          <section className="formSection">
-            <Form
-              cardName={ cardName }
-              cardDescription={ cardDescription }
-              cardAttr1={ cardAttr1 }
-              cardAttr2={ cardAttr2 }
-              cardAttr3={ cardAttr3 }
-              cardImage={ cardImage }
-              cardRare={ cardRare }
-              cardTrunfo={ cardTrunfo }
-              hasTrunfo={ hasTrunfo }
-              onInputChange={ this.onInputChange }
-              isSaveButtonDisabled={ isSaveButtonDisabled }
-              onSaveButtonClick={ onSaveButtonClick }
-            />
-          </section>
+          <section className="boxCreationCards">
 
-          <section className="cardSection">
+            <section className="formSection">
+              <Form
+                cardName={ cardName }
+                cardDescription={ cardDescription }
+                cardAttr1={ cardAttr1 }
+                cardAttr2={ cardAttr2 }
+                cardAttr3={ cardAttr3 }
+                cardImage={ cardImage }
+                cardRare={ cardRare }
+                cardTrunfo={ cardTrunfo }
+                hasTrunfo={ hasTrunfo }
+                onInputChange={ this.onInputChange }
+                isSaveButtonDisabled={ isSaveButtonDisabled }
+                onSaveButtonClick={ this.onSaveButtonClick }
+              />
+            </section>
 
-            <h2>
-              Pré-Visualização:
-            </h2>
+            <section className="cardSection">
+              <h2>
+                Pré-Visualização:
+              </h2>
 
-            <div>
               <Card
                 cardName={ cardName }
                 cardDescription={ cardDescription }
@@ -125,9 +165,25 @@ class App extends React.Component {
                 cardImage={ cardImage }
                 cardRare={ cardRare }
                 cardTrunfo={ cardTrunfo }
+                className="boxCard"
               />
-            </div>
 
+            </section>
+
+          </section>
+
+          <section className="cardBookContent">
+            <h2 className="cardBookTitle">
+              CardBook Tryunfo
+            </h2>
+            <div className="cardBookList">
+              {/* {bookOfCards.map((cardInBook) => (
+                <div className="cardInBookContent" key={ cardInBook.cardName }>
+                  <CardInBook cardInBook={ cardInBook } key={ cardInBook.cardName } />
+                </div>
+              ))} */}
+              <CardInBook />
+            </div>
           </section>
 
         </main>
