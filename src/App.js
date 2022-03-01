@@ -1,6 +1,8 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import ButtonDelete from './components/ButtonDelete';
+
 import './App.css';
 
 class App extends React.Component {
@@ -124,6 +126,22 @@ class App extends React.Component {
     }
   };
 
+  handleOnclickDelete = (event) => {
+    const { bookOfCards } = this.state;
+    const cardInBookClicked = event.target.parentNode;
+
+    const findElementForDelete = bookOfCards
+      .filter((cardInBook) => (
+        cardInBook.cardName !== cardInBookClicked.id
+      ));
+    this.setState({
+      bookOfCards: findElementForDelete,
+    }, this.handleHasTrunfo);
+
+    // console.log(cardInBookClicked);
+    // console.log(findElementForDelete);
+  };
+
   render() {
     const {
       cardName,
@@ -195,19 +213,22 @@ class App extends React.Component {
             </h2>
             <div className="cardBookList">
               { bookOfCards.map((cardInBook) => (
-                <Card
-                  className="cardInBoxContent"
-                  cardInBook={ cardInBook }
-                  key={ cardInBook.cardName }
-                  cardName={ cardInBook.cardName }
-                  cardDescription={ cardInBook.cardDescription }
-                  cardAttr1={ cardInBook.cardAttr1 }
-                  cardAttr2={ cardInBook.cardAttr2 }
-                  cardAttr3={ cardInBook.cardAttr3 }
-                  cardImage={ cardInBook.cardImage }
-                  cardRare={ cardInBook.cardRare }
-                  cardTrunfo={ cardInBook.cardTrunfo }
-                />
+                <div id={ cardInBook.cardName } key={ cardInBook.cardName }>
+                  <Card
+                    className="cardInBoxContent"
+                    cardInBook={ cardInBook }
+                    key={ cardInBook.cardName }
+                    cardName={ cardInBook.cardName }
+                    cardDescription={ cardInBook.cardDescription }
+                    cardAttr1={ cardInBook.cardAttr1 }
+                    cardAttr2={ cardInBook.cardAttr2 }
+                    cardAttr3={ cardInBook.cardAttr3 }
+                    cardImage={ cardInBook.cardImage }
+                    cardRare={ cardInBook.cardRare }
+                    cardTrunfo={ cardInBook.cardTrunfo }
+                  />
+                  <ButtonDelete handleOnclickDelete={ this.handleOnclickDelete } />
+                </div>
               ))}
             </div>
           </section>
