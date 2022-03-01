@@ -80,6 +80,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
     } = this.state;
 
     const cardBook = {
@@ -91,6 +92,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      hasTrunfo,
     };
     this.setState((prevState) => ({
       bookOfCards: [...prevState.bookOfCards, cardBook],
@@ -104,8 +106,22 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
-    }));
-    console.log(this.state);
+    }), this.handleHasTrunfo);
+  };
+
+  handleHasTrunfo = () => {
+    const { bookOfCards } = this.state;
+    const testHasTrunfo = bookOfCards
+      .some((cardInBook) => cardInBook.cardTrunfo === true);
+    if (testHasTrunfo) {
+      this.setState({
+        hasTrunfo: true,
+      });
+    } else {
+      this.setState({
+        hasTrunfo: false,
+      });
+    }
   };
 
   render() {
@@ -122,6 +138,7 @@ class App extends React.Component {
       hasTrunfo,
       bookOfCards,
     } = this.state;
+
     return (
       <div className="bodyContent">
 
@@ -172,6 +189,7 @@ class App extends React.Component {
           </section>
 
           <section className="cardBookContent">
+
             <h2 className="cardBookTitle">
               CardBook Tryunfo
             </h2>
