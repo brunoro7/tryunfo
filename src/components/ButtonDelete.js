@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ButtonDelete extends React.Component {
   render() {
@@ -14,5 +15,9 @@ class ButtonDelete extends React.Component {
     );
   }
 }
+
+ButtonDelete.propTypes = {
+  handleOnclickDelete: PropTypes.func.isRequired,
+};
 
 export default ButtonDelete;
