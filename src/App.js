@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import ButtonDelete from './components/ButtonDelete';
+import InputSearch from './components/InputSearch';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       bookOfCards: [],
+      valueInputSearch: '',
     };
   }
 
@@ -142,6 +144,13 @@ class App extends React.Component {
     // console.log(findElementForDelete);
   };
 
+  handleOnInputSearch = (event) => {
+    const valueOnInputSearch = event.target.value;
+    this.setState({
+      valueInputSearch: valueOnInputSearch,
+    });
+  };
+
   render() {
     const {
       cardName,
@@ -155,19 +164,17 @@ class App extends React.Component {
       isSaveButtonDisabled,
       hasTrunfo,
       bookOfCards,
+      valueInputSearch,
     } = this.state;
 
     return (
       <div className="bodyContent">
-
         <header className="headerContent">
           <h1>Tryunfo</h1>
         </header>
-
         <main className="mainContent">
 
           <section className="boxCreationCards">
-
             <section className="formSection">
               <Form
                 cardName={ cardName }
@@ -179,62 +186,58 @@ class App extends React.Component {
                 cardRare={ cardRare }
                 cardTrunfo={ cardTrunfo }
                 hasTrunfo={ hasTrunfo }
-                onInputChange={ this.onInputChange }
                 isSaveButtonDisabled={ isSaveButtonDisabled }
+                onInputChange={ this.onInputChange }
                 onSaveButtonClick={ this.onSaveButtonClick }
+                { ...this.state }
               />
             </section>
-
             <section className="cardSection">
               <h2>
                 Pré-Visualização:
               </h2>
 
               <Card
-                cardName={ cardName }
-                cardDescription={ cardDescription }
-                cardAttr1={ cardAttr1 }
-                cardAttr2={ cardAttr2 }
-                cardAttr3={ cardAttr3 }
-                cardImage={ cardImage }
-                cardRare={ cardRare }
-                cardTrunfo={ cardTrunfo }
+                { ...this.state }
                 className="boxCard"
               />
-
+              {/* { // ajuda do Cassius turma C (através do emerson turma c), ideia de  fazer um spread no this.state } */}
             </section>
-
           </section>
 
           <section className="cardBookContent">
-
-            <h2 className="cardBookTitle">
-              CardBook Tryunfo
-            </h2>
+            <header>
+              <h2 className="cardBookTitle">
+                CardBook Tryunfo
+              </h2>
+              <InputSearch
+                handleOnInputSearch={ this.handleOnInputSearch }
+                value={ valueInputSearch }
+              />
+            </header>
             <div className="cardBookList">
-              { bookOfCards.map((cardInBook) => (
-                <div id={ cardInBook.cardName } key={ cardInBook.cardName }>
-                  <Card
-                    className="cardInBoxContent"
-                    cardInBook={ cardInBook }
-                    key={ cardInBook.cardName }
-                    cardName={ cardInBook.cardName }
-                    cardDescription={ cardInBook.cardDescription }
-                    cardAttr1={ cardInBook.cardAttr1 }
-                    cardAttr2={ cardInBook.cardAttr2 }
-                    cardAttr3={ cardInBook.cardAttr3 }
-                    cardImage={ cardInBook.cardImage }
-                    cardRare={ cardInBook.cardRare }
-                    cardTrunfo={ cardInBook.cardTrunfo }
-                  />
-                  <ButtonDelete handleOnclickDelete={ this.handleOnclickDelete } />
-                </div>
-              ))}
+              { bookOfCards.filter((card) => card.cardName.includes(valueInputSearch))
+                .map((cardInBook) => (
+                  <div id={ cardInBook.cardName } key={ cardInBook.cardName }>
+                    <Card
+                      className="cardInBoxContent"
+                      cardInBook={ cardInBook }
+                      key={ cardInBook.cardName }
+                      cardName={ cardInBook.cardName }
+                      cardDescription={ cardInBook.cardDescription }
+                      cardAttr1={ cardInBook.cardAttr1 }
+                      cardAttr2={ cardInBook.cardAttr2 }
+                      cardAttr3={ cardInBook.cardAttr3 }
+                      cardImage={ cardInBook.cardImage }
+                      cardRare={ cardInBook.cardRare }
+                      cardTrunfo={ cardInBook.cardTrunfo }
+                    />
+                    <ButtonDelete handleOnclickDelete={ this.handleOnclickDelete } />
+                  </div>
+                ))}
             </div>
           </section>
-
         </main>
-
       </div>
     );
   }

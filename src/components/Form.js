@@ -63,10 +63,6 @@ class Form extends React.Component {
             ? 'Você já tem um Super Trunfo em seu baralho'
             : <InputCheckTrunfo valor={ cardTrunfo } quandoMudar={ onInputChange } />
         }
-        {/* <InputCheckTrunfo
-          valor={ cardTrunfo }
-          quandoMudar={ onInputChange }
-        /> */}
         <SaveButton
           valor={ isSaveButtonDisabled }
           quandoMudar={ onSaveButtonClick }
